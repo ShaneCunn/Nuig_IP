@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Contact form</title>
+    <link rel='stylesheet' href='form.css' type='text/css'/>
+    <script src="js/valid.js"></script>
+</head>
+<body onload="document.registration.username.focus();">
+<h1>Contact Form</h1>
+
+<form name='registration' onSubmit="return formValidation();">
+    <ul>
+
+        <li><label for="username">Name:</label></li>
+        <li><input type="text" name="username" size="50"/></li>
+
+        <li><label for="email">Email:</label></li>
+        <li><input type="text" name="email" size="50"/></li>
+
+        <li><label for="country">Subject</label></li>
+        <li><select name="country">
+            <option selected="" value="Default">(Please select a country)</option>
+            <option value=Sales>Sales</option>
+            <option value="Returns">Returns</option>
+            <option value="Shipping">Shipping</option>
+            <option value="Support">Support</option>
+        </select></li>
+
+        <li><label for="message">Message:</label></li>
+        <li><textarea name="message" id="desc"></textarea></li>
+        <li><input type="submit" name="submit" value="Submit"/></li>
+    </ul>
+</form>
+</body>
+</html>
