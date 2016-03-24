@@ -1,0 +1,31 @@
+<html>
+<head>
+
+<script language="JavaScript">
+
+var image1 = new Image;
+var image2 = new Image;
+var image3 = new Image;
+image1.src = "marquee1.gif";
+image2.src = "marquee2.gif";
+image3.src = "marquee3.gif";
+
+var frame = new Array(image1,image2,image3);
+var numframes = frame.length;
+var curframe = 0;
+
+function animateBanner()
+{
+   curframe++;
+   if(curframe == numframes) curframe = 0;
+   document.myBanner.src = frame[curframe].src;
+   setTimeout("animateBanner()",600);  
+}
+
+</script>
+
+</head>
+<body leftmargin=0 topmargin=0 rightmargin=0 bottommargin=0 onLoad="animateBanner()">
+<img alt="free ebooks!" border=0 width=468 height=60 name="myBanner" src="marquee1.gif" onClick="window.location.href='targetpage2.htm'">
+</body>
+</html>

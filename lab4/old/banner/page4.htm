@@ -1,0 +1,23 @@
+<html>
+<head>
+
+<script language="JavaScript">
+
+var bannerPage = new Array("banner1.htm","banner2.htm")
+var numBanners = bannerPage.length;
+var curBanner = 0;
+
+function rotateBanner()
+{
+   curBanner++;
+   if(curBanner == numBanners) curBanner = 0;
+   banner.location.href=bannerPage[curBanner]; 
+   setTimeout("rotateBanner()",10000);  
+}
+</script>
+
+</head>
+<body onLoad="rotateBanner()">
+<iframe name="banner" frameborder=0 marginwidth=0 marginheight=0 width=468 height=60 scrolling="no" src="banner1.htm">
+</body>
+</html>

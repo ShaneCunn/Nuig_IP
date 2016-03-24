@@ -8,8 +8,8 @@
 
 
 define("DB_HOST" , "localhost");
-define("DB_USER" , "mydb2022o");
-define("DB_PASS" , "mydb2022o");
-define("DB_NAME" , "mydb2022");
+define("DB_USER" , "root");
+define("DB_PASS" , "&O*0wsSZ4w5xV%mW%@UusbLukvQT&6Vy");
+define("DB_NAME" , "registration");
 
 

@@ -1,0 +1,24 @@
+var image1 = new Image;
+var image2 = new Image;
+var image3 = new Image;
+var image4 = new Image;
+image1.src = "frame1.gif";
+image2.src = "frame2.gif";
+image3.src = "frame3.gif";
+image4.src = "frame4.gif";
+
+var frame = new Array(image1,image2,image3,image4);
+var delay = new Array(500,2500,500,2500);
+var numframes = frame.length;
+var curframe = 0;
+
+function animateBanner()
+{
+   if(document.myBanner.complete)
+   {
+      curframe++;
+      if(curframe == numframes) curframe = 0;
+      document.myBanner.src = frame[curframe].src;
+      setTimeout("animateBanner()",delay[curframe]);
+   }  
+}
