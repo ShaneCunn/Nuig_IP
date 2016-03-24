@@ -70,3 +70,5 @@ Thumbs.db
 *.dll
 *.lib
 *.sbr
+*.xml
+.idea/deployment.xml
