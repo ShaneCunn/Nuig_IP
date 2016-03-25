@@ -86,7 +86,7 @@ if (isset($_POST['login'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Practice sign up project</a>
+            <a class="navbar-brand" href="index.php">Administrator page for Nuig Shop</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
