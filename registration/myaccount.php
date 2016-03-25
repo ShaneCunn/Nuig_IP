@@ -16,10 +16,22 @@ error_reporting(E_ALL);
 
 
 if (!isset($_SESSION['user_email'])) {
-    header("Location:index.php?err=" . urldecode("You need to login to view the account page."));
+    header("Location:login.php?err=" . urldecode("You need to login to view the account page."));
     exit();
 
 }
+$query = "select * from messages";
+$result = $db->query($query);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "id: " . $row["id"]. " - Name: " . $row["name"]. " " . $row["subject"].  " " . $row["message"]."<br>";
+    }
+} else {
+    echo "0 results";
+}
+
 
 ?>
 
@@ -77,6 +89,33 @@ if (!isset($_SESSION['user_email'])) {
             Welcome <?php echo $_SESSION['user_email'] ?>
         </h2>
     </div>
+  
+        <h2>Table</h2>
+        <p>The .table-responsive class creates a responsive table which will scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, there is no difference:</p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>Country</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Anna</td>
+                    <td>Pitt</td>
+                    <td>35</td>
+                    <td>New York</td>
+                    <td>USA</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
 
 </div><!-- /.container -->

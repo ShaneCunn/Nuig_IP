@@ -1,0 +1,27 @@
+.clock {
+    color: #ebebeb;
+    padding: 15px;
+    display: block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    padding-top: 9.5px;
+    padding-bottom: 9.5px;
+
+    background-color rgba(0, 0, 0, 0) box-sizing border-box color rgb(235, 235, 235) cursor auto display block font-family Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif font-size 12px height 40px line-height 21px list-style-image none list-style-position outside list-style-type none padding-bottom 9.5px padding-left 15px padding-right 15px padding-top 9.5px position relative text-align left text-decoration none
+}
+
+.slider {
+
+    transition: background-image ease-in-out;
+
+}
+
+#slider {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#slider.fadeOut {
+    opacity: 0;
+}
+

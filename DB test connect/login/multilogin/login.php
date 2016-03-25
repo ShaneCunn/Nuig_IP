@@ -44,7 +44,7 @@ if(isset($login)){
     } else if($type=="user"){
       $_SESSION['mysesi']=$name;
       $_SESSION['mytype']=$type;
-      echo "<script>window.location.assign('index.php')</script>";
+      echo "<script>window.location.assign('login.php')</script>";
     } else{
 ?>
 <div class="alert alert-warning alert-dismissible" role="alert">

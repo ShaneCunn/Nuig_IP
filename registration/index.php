@@ -14,7 +14,7 @@ error_reporting(E_ALL);
 include('includes/config.php');
 include('includes/db.php');
 if (isset($_SESSION['user_email'])) {
-    header("Location:myaccount.php");
+    header("Location:showContactUs.php");
     exit();
 
 }
@@ -34,16 +34,16 @@ if (isset($_POST['login'])) {
 
         if ($row['status'] == 1) {
             $_SESSION['user_email'] = $email;
-            header("Location:myaccount.php?");
+            header("Location:showContactUs.php?");
             exit();
         } else {
-            header("Location:index.php?err=" . urldecode("the user account is not activated"));
+            header("Location:login.php?err=" . urldecode("the user account is not activated"));
             exit();
 
         }
 
     } else {
-        header("Location:index.php?err=" . urldecode("Wrong email or password"));
+        header("Location:login.php?err=" . urldecode("Wrong email or password"));
         exit();
 
     }

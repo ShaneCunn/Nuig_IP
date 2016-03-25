@@ -66,7 +66,7 @@ if (isset($_POST['register'])) {
         $messsage = "Hi $name! account created, here is the activation link: http://nuig.brtd.net/registration/activate.php?token=$token";
 
         mail($email, 'Activate account', $messsage, 'From: mayhem2277@gmail.com');
-        header("Location:index.php?success=" . urldecode("Activation email sented!"));
+        header("Location:login.php?success=" . urldecode("Activation email sented!"));
 
     }
 

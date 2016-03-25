@@ -37,7 +37,7 @@ if(isset($login)){
   if($user==$username && $pass=$password){
     session_start();
     $_SESSION['mysesi']=$name;
-    echo "<script>window.location.assign('index.php')</script>";
+    echo "<script>window.location.assign('login.php')</script>";
   } else{
 ?>
 <div class="alert alert-danger alert-dismissible" role="alert">
