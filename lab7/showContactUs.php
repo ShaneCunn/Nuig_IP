@@ -83,6 +83,9 @@ if (!isset($_SESSION['user_email'])) {
                 <li>
                     <a href="clock.html">Clock</a>
                 </li>
+                <li>
+                    <a href="editStock.php">stock</a>
+                </li>
 
 
                 <li class="active">
