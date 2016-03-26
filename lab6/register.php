@@ -119,9 +119,37 @@ if (isset($_POST['register'])) {
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="contact.php">Contact</a>
+                </li>
+
+                <li>
+                    <a href="special_offers.html">Special Offers</a>
+                </li>
+
+                <li>
+                    <a href="links.html">Useful links</a>
+                </li>
+                <li>
+                    <a href="clock.html">Clock</a>
+                </li>
+                <?php if (isset($_SESSION['user_email'])) { ?>
+                <li>
+                    <a href="login.php">show login page</a>
+                </li>
+                <?php } ?>
                 <li><a href="login.php">Login</a></li>
                 <li class="active"><a href="register.php">Register</a></li>
-                <li><a href="#contact">Contact</a></li>
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -147,7 +175,8 @@ if (isset($_POST['register'])) {
             <h2 class="form-signin-heading">Register Here</h2>
 
             <?php if (isset($_GET['err'])) { ?>
-                <div class="alert alert-danger"><?php echo $_GET['err'] ?></div>
+                <div class="alert alert-danger fade-in" ><a href="#" class="close" data-dismiss="alert"
+                                                            aria-label="close">&times;</a><?php echo $_GET['err'] ?></div>
             <?php } ?>
 
             <div class="form-group">

@@ -90,9 +90,36 @@ if (isset($_POST['login'])) {
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
 
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="contact.php">Contact</a>
+                </li>
+
+                <li>
+                    <a href="special_offers.html">Special Offers</a>
+                </li>
+
+                <li>
+                    <a href="links.html">Useful links</a>
+                </li>
+                <li>
+                    <a href="clock.html">Clock</a>
+                </li>
+
+                <?php if (!isset($_SESSION['user_email'])) { ?>
+                    <li class="active"><a href="login.php">Login</a></li>
+
+                    <li><a href="register.php">Register</a></li>
+
+
+                <?php } ?>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -115,13 +142,20 @@ if (isset($_POST['login'])) {
         </div>
 
         <form class="form-signin" action="login.php" method="post">
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading fade-in">Please sign in to see Administrator page</h2>
             <?php if (isset($_GET['success'])) { ?>
-                <div class="alert alert-success"><?php echo $_GET['success'] ?></div>
+                <div class="alert alert-success fade-in" ><a href="#" class="close" data-dismiss="alert"
+                                                             aria-label="close">&times;</a><?php echo $_GET['success'] ?></div>
             <?php } ?>
             <?php if (isset($_GET['err'])) { ?>
-                <div class="alert alert-danger"><?php echo $_GET['err'] ?></div>
+                <div class="alert alert-danger fade-in" ><a href="#" class="close" data-dismiss="alert"
+                                                    aria-label="close">&times;</a><?php echo $_GET['err'] ?></div>
             <?php } ?>
+            <div class="alert alert-info fade-in"><a href="#" class="close" data-dismiss="alert"
+                                                     aria-label="close">&times;</a>
+                <strong>Test Login: test@test.com <br>Password: 12345
+                </strong>
+            </div>
 
             <label for="inputEmail" class="sr-only">Email address</label>
             <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required
@@ -137,9 +171,28 @@ if (isset($_POST['login'])) {
             <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign in</button>
             <p>forgot your password? <a href="forgot_password.php">click here</a></p>
             <p>new user? <a href="register.php">create new account</a></p>
+
+
         </form>
+
+
     </div>
 </div> <!-- /container -->
+
+<!-- /.container -->
+
+<div class="container">
+    <hr>
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="col-lg-12">
+            <p>Copyright &copy; Shane Cunningham 2015</p>
+        </div>
+
+    </footer>
+</div>
 
 
 <!-- Bootstrap core JavaScript

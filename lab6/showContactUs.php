@@ -60,17 +60,44 @@ if (!isset($_SESSION['user_email'])) {
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <?php if (!isset($_SESSION['user_email'])) { ?>
-                    <li><a href="login.php">Login</a></li>
-                <?php } ?>
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="contact.php">Contact</a>
+                </li>
+
+                <li>
+                    <a href="special_offers.html">Special Offers</a>
+                </li>
+
+                <li>
+                    <a href="links.html">Useful links</a>
+                </li>
+                <li>
+                    <a href="clock.html">Clock</a>
+                </li>
+
+
+                <li class="active">
+                    <a href="showContactUs.php">Administrator panel</a>
+                </li>
 
                 <?php if (!isset($_SESSION['user_email'])) { ?>
+                    <li class="active"><a href="login.php">Login</a></li>
                     <li><a href="register.php">Register</a></li>
                 <?php } ?>
 
                 <?php if (isset($_SESSION['user_email'])) { ?>
                     <li><a href="logout.php">Logout</a></li>
                 <?php } ?>
+
 
             </ul>
         </div><!--/.nav-collapse -->
@@ -139,6 +166,21 @@ if (!isset($_SESSION['user_email'])) {
 
 
     </div><!-- /.container -->
+
+    <!-- /.container -->
+
+    <div class="container">
+        <hr>
+        <!-- Footer -->
+
+        <footer>
+
+            <div class="col-lg-12">
+                <p>Copyright &copy; Shane Cunningham 2015</p>
+            </div>
+
+        </footer>
+    </div>
 
 
     <!-- Bootstrap core JavaScript

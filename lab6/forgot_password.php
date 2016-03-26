@@ -31,7 +31,6 @@ include('includes/db.php');
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
-
     <link href="css/shop-homepage.css" rel="stylesheet">
 
 
@@ -90,6 +89,19 @@ include('includes/db.php');
     </form>
 
 </div><!-- /.container -->
+    <div class="container">
+        <hr>
+        <!-- Footer -->
+
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Shane Cunningham 2015</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- /.container -->
 
 
 <!-- Bootstrap core JavaScript
