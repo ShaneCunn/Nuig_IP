@@ -85,7 +85,7 @@ if (isset($_POST['register'])) {
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="favicon.ico">
 
     <title>register</title>
 
@@ -143,9 +143,9 @@ if (isset($_POST['register'])) {
                     <a href="clock.html">Clock</a>
                 </li>
                 <?php if (isset($_SESSION['user_email'])) { ?>
-                <li>
-                    <a href="login.php">show login page</a>
-                </li>
+                    <li>
+                        <a href="login.php">show login page</a>
+                    </li>
                 <?php } ?>
                 <li><a href="login.php">Login</a></li>
                 <li class="active"><a href="register.php">Register</a></li>
@@ -175,8 +175,9 @@ if (isset($_POST['register'])) {
             <h2 class="form-signin-heading">Register Here</h2>
 
             <?php if (isset($_GET['err'])) { ?>
-                <div class="alert alert-danger fade-in" ><a href="#" class="close" data-dismiss="alert"
-                                                            aria-label="close">&times;</a><?php echo $_GET['err'] ?></div>
+                <div class="alert alert-danger fade-in"><a href="#" class="close" data-dismiss="alert"
+                                                           aria-label="close">&times;</a><?php echo $_GET['err'] ?>
+                </div>
             <?php } ?>
 
             <div class="form-group">

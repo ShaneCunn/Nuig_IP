@@ -54,7 +54,7 @@ include('includes/db.php');
             <ul class="nav navbar-nav">
                 <li><a href="login.php">Login</a></li>
                 <li><a href="register.php">Register</a></li>
-                <li><a href="#contact">Contact</a></li>
+                
             </ul>
         </div><!--/.nav-collapse -->
     </div>

@@ -172,7 +172,7 @@ if (isset($_POST["submit"])) {
                 <li>
                     <a href="index.html">Home</a>
                 </li>
-                <li  >
+                <li>
                     <a href="about.html">About</a>
                 </li>
 
@@ -286,9 +286,10 @@ if (isset($_POST["submit"])) {
                         <div class="form-group">
                             <label for="email">Email:</label>
 
-                            <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com"
-                                   value="<?php if(!empty($email)){?><?php echo htmlspecialchars($_POST['email']);?><?php }?>">
-                            <?php if(!empty($errEmail)){ ?><?php echo"<p class='text-danger'>$errEmail</p>";?><?php }?>
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="example@domain.com"
+                                   value="<?php if (!empty($email)) { ?><?php echo htmlspecialchars($_POST['email']); ?><?php } ?>">
+                            <?php if (!empty($errEmail)) { ?><?php echo "<p class='text-danger'>$errEmail</p>"; ?><?php } ?>
 
                         </div>
                         <div class="form-group">
@@ -309,7 +310,8 @@ if (isset($_POST["submit"])) {
                         <div class="form-group">
                             <label for="message">Message:</label>
 
-                <textarea class="form-control" rows="4" name="message" placeholder="Enter your message for us here. We will get back to you within 2 business days."></textarea>
+                            <textarea class="form-control" rows="4" name="message"
+                                      placeholder="Enter your message for us here. We will get back to you within 2 business days."></textarea>
                             <?php if (!empty($message)) { ?><?php echo htmlspecialchars($_POST['message']); ?><?php } ?>
                             <?php if (!empty($errMessage)) { ?><?php echo "<p class='text-danger'>$errMessage</p>"; ?><?php } ?>
 
@@ -328,19 +330,21 @@ if (isset($_POST["submit"])) {
                         </div>
 
                         <?php if (isset($_GET['success'])) { ?>
-                            <div class="alert alert-success fade-in" ><a href="#" class="close" data-dismiss="alert"
-                                                                         aria-label="close">&times;</a><?php echo $_GET['success'] ?></div>
+                            <div class="alert alert-success fade-in"><a href="#" class="close" data-dismiss="alert"
+                                                                        aria-label="close">&times;</a><?php echo $_GET['success'] ?>
+                            </div>
                         <?php } ?>
 
                         <?php if (isset($_GET['err'])) { ?>
-                            <div class="alert alert-warning fade-in" ><a href="#" class="close" data-dismiss="alert"
-                                                                         aria-label="close">&times;</a><?php echo $_GET['err'] ?></div>
+                            <div class="alert alert-warning fade-in"><a href="#" class="close" data-dismiss="alert"
+                                                                        aria-label="close">&times;</a><?php echo $_GET['err'] ?>
+                            </div>
                         <?php } ?>
-                       
-                        </div>
-                    </form>
 
-                </div>
+                        </div>
+
+
+            </div>
 
 
             </div>
@@ -348,9 +352,6 @@ if (isset($_POST["submit"])) {
 
         </div>
     </div>
-
-
-</div>
 
 
 <!-- /.container -->

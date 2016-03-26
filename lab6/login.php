@@ -144,12 +144,14 @@ if (isset($_POST['login'])) {
         <form class="form-signin" action="login.php" method="post">
             <h2 class="form-signin-heading fade-in">Please sign in to see Administrator page</h2>
             <?php if (isset($_GET['success'])) { ?>
-                <div class="alert alert-success fade-in" ><a href="#" class="close" data-dismiss="alert"
-                                                             aria-label="close">&times;</a><?php echo $_GET['success'] ?></div>
+                <div class="alert alert-success fade-in"><a href="#" class="close" data-dismiss="alert"
+                                                            aria-label="close">&times;</a><?php echo $_GET['success'] ?>
+                </div>
             <?php } ?>
             <?php if (isset($_GET['err'])) { ?>
-                <div class="alert alert-danger fade-in" ><a href="#" class="close" data-dismiss="alert"
-                                                    aria-label="close">&times;</a><?php echo $_GET['err'] ?></div>
+                <div class="alert alert-danger fade-in"><a href="#" class="close" data-dismiss="alert"
+                                                           aria-label="close">&times;</a><?php echo $_GET['err'] ?>
+                </div>
             <?php } ?>
             <div class="alert alert-info fade-in"><a href="#" class="close" data-dismiss="alert"
                                                      aria-label="close">&times;</a>
