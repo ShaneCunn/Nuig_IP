@@ -10,8 +10,8 @@ error_reporting(E_ALL);
  * @Student    ID 15104623
  */
 
-include('registration/includes/config.php');
-include('registration/includes/db.php');
+include('includes/config.php');
+include('includes/db.php');
 global $db;
 
 if (isset($_POST["submit"])) {
@@ -212,7 +212,7 @@ if (isset($_POST["submit"])) {
                 <a class="list-group-item" href=
                 "special_offers.html">Special Offers</a> <a class=
                                                             "list-group-item" href="links.html">Useful links</a>
-                <a class="list-group-item" href="#">Category 3</a>
+                <a class="list-group-item" href="clock.html">Clock</a>
             </div>
         </div>
         <div class="span10">
