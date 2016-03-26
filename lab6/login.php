@@ -29,7 +29,6 @@ if (isset($_POST['login'])) {
     $result = $db->query($query);
 
 
-
     if ($row = $result->fetch_assoc()) {
 
         if ($row['status'] == 1) {
@@ -71,7 +70,7 @@ if (isset($_POST['login'])) {
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
-
+    <link href="css/shop-homepage.css" rel="stylesheet">
 
 </head>
 
@@ -80,9 +79,9 @@ if (isset($_POST['login'])) {
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
+            <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type=
+            "button"><span class="sr-only">Toggle navigation</span>
+
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -99,34 +98,48 @@ if (isset($_POST['login'])) {
     </div>
 </nav>
 
+
 <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">NUIG Shop</p>
 
-    <form class="form-signin" action="login.php" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <?php if (isset($_GET['success'])) { ?>
-            <div class="alert alert-success"><?php echo $_GET['success'] ?></div>
-        <?php } ?>
-        <?php if (isset($_GET['err'])) { ?>
-            <div class="alert alert-danger"><?php echo $_GET['err'] ?></div>
-        <?php } ?>
-
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+            <div class="list-group">
+                <a class="list-group-item" href="index.html">Home</a>
+                <a class="list-group-item" href="about.html">About</a>
+                <a class="list-group-item" href="contact.php">Contact</a>
+                <a class="list-group-item" href="special_offers.html">Special Offers</a>
+                <a class="list-group-item" href="links.html">Useful links</a>
+                <a class="list-group-item" href="clock.html">Clock</a>
+            </div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign in</button>
-    </form>
 
+        <form class="form-signin" action="login.php" method="post">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <?php if (isset($_GET['success'])) { ?>
+                <div class="alert alert-success"><?php echo $_GET['success'] ?></div>
+            <?php } ?>
+            <?php if (isset($_GET['err'])) { ?>
+                <div class="alert alert-danger"><?php echo $_GET['err'] ?></div>
+            <?php } ?>
+
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required
+                   autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password"
+                   required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign in</button>
+            <p>forgot your password? <a href="forgot_password.php">click here</a></p>
+            <p>new user? <a href="register.php">create new account</a></p>
+        </form>
+    </div>
 </div> <!-- /container -->
-
-
-
-
 
 
 <!-- Bootstrap core JavaScript

@@ -66,7 +66,7 @@ if (isset($_POST['register'])) {
         $messsage = "Hi $name! account created, here is the activation link: http://nuig.brtd.net/registration/activate.php?token=$token";
 
         mail($email, 'Activate account', $messsage, 'From: mayhem2277@gmail.com');
-        header("Location:login.php?success=" . urldecode("Activation email sented!"));
+        header("Location:login.php?success=" . urldecode("Activation email sent!"));
 
     }
 
@@ -94,12 +94,12 @@ if (isset($_POST['register'])) {
 
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
+    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-
-    <link href="css/custom.css" rel="stylesheet">
 
 </head>
 
@@ -129,39 +129,56 @@ if (isset($_POST['register'])) {
 
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">NUIG Shop</p>
 
-    <form class="form-signin" action="register.php" method="post" style="margin-top:35px">
-        <h2>Register Here</h2>
-        <hr>
-        <?php if (isset($_GET['err'])) { ?>
-            <div class="alert alert-danger"><?php echo $_GET['err'] ?></div>
-        <?php } ?>
-
-        <div class="form-group">
-            <label for="exampleInputEmail1" class="sr-only">Name</label>
-            <input type="name" name="name" class="form-control" placeholder="Name" required autofocus
-                   value="<?php echo @$_SESSION['name']; ?>">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1" class="sr-only">Email address</label>
-            <input type="email" name="email" class="form-control" placeholder="Email" required
-                   value="<?php echo @$_SESSION['email']; ?>">
+            <div class="list-group">
+                <a class="list-group-item" href="index.html">Home</a>
+                <a class="list-group-item" href="about.html">About</a>
+                <a class="list-group-item" href="contact.php">Contact</a>
+                <a class="list-group-item" href="special_offers.html">Special Offers</a>
+                <a class="list-group-item" href="links.html">Useful links</a>
+                <a class="list-group-item" href="clock.html">Clock</a>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="exampleInputPassword1" class="sr-only">Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Password" required
-                   value="<?php echo @$_SESSION['password']; ?>">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1" class="sr-only">Confirm Password</label>
-            <input type="password" name="confirm_password" class="form-control"
-                   placeholder="Confirm Password" required value="<?php echo @$_SESSION['confirm_password']; ?>">
-        </div>
+        <form class="form-signin" action="register.php" method="post">
+            <h2 class="form-signin-heading">Register Here</h2>
+
+            <?php if (isset($_GET['err'])) { ?>
+                <div class="alert alert-danger"><?php echo $_GET['err'] ?></div>
+            <?php } ?>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="sr-only">Name</label>
+                <input type="name" name="name" class="form-control" placeholder="Name" required autofocus
+                       value="<?php echo @$_SESSION['name']; ?>">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="sr-only">Email address</label>
+                <input type="email" name="email" class="form-control" placeholder="Email" required
+                       value="<?php echo @$_SESSION['email']; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="sr-only">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" required
+                       value="<?php echo @$_SESSION['password']; ?>">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="sr-only">Confirm Password</label>
+                <input type="password" name="confirm_password" class="form-control"
+                       placeholder="Confirm Password" required value="<?php echo @$_SESSION['confirm_password']; ?>">
+            </div>
 
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" class="btn btn-default" name="register">Register</button>
-    </form>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" class="btn btn-default" name="register">
+                Register
+            </button>
+        </form>
+
+    </div>
 
 </div><!-- /.container -->
 

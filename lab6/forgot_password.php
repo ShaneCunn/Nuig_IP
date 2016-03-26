@@ -26,16 +26,13 @@ include('includes/db.php');
     <title>Forgot Password</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-
     <link href="css/custom.css" rel="stylesheet">
+
+    <link href="css/shop-homepage.css" rel="stylesheet">
 
 
 </head>
@@ -66,7 +63,21 @@ include('includes/db.php');
 
 <div class="container">
 
-    <form  class="form-signin" method="post" style="margin-top:35px">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">NUIG Shop</p>
+
+            <div class="list-group">
+                <a class="list-group-item" href="index.html">Home</a>
+                <a class="list-group-item" href="about.html">About</a>
+                <a class="list-group-item" href="contact.php">Contact</a>
+                <a class="list-group-item" href="special_offers.html">Special Offers</a>
+                <a class="list-group-item" href="links.html">Useful links</a>
+                <a class="list-group-item" href="clock.html">Clock</a>
+            </div>
+        </div>
+
+    <form  class="form-signin" method="post">
         <h2 class="form-signin-heading">Password reminder page</h2>
         <div class="form-group">
             <label for="inputEmail" class="sr-only">Email address</label>

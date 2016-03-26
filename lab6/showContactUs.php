@@ -14,14 +14,10 @@ error_reporting(E_ALL);
 include('includes/config.php');
 include('includes/db.php');
 
-
 if (!isset($_SESSION['user_email'])) {
     header("Location:login.php?err=" . urldecode("You need to login to view the account page."));
     exit();
-
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +40,7 @@ if (!isset($_SESSION['user_email'])) {
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <link href="css/shop-homepage.css" rel="stylesheet">
 
 </head>
 
@@ -63,69 +60,92 @@ if (!isset($_SESSION['user_email'])) {
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <?php if (!isset($_SESSION['user_email'])) { ?>
+                    <li><a href="login.php">Login</a></li>
+                <?php } ?>
+
+                <?php if (!isset($_SESSION['user_email'])) { ?>
+                    <li><a href="register.php">Register</a></li>
+                <?php } ?>
+
+                <?php if (isset($_SESSION['user_email'])) { ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php } ?>
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">NUIG Shop</p>
 
-    <div class="jumbostron">
+            <div class="list-group">
+                <a class="list-group-item" href="index.html">Home</a>
+                <a class="list-group-item" href="about.html">About</a>
+                <a class="list-group-item" href="contact.php">Contact</a>
+                <a class="list-group-item" href="special_offers.html">Special Offers</a>
+                <a class="list-group-item" href="links.html">Useful links</a>
+                <a class="list-group-item" href="clock.html">Clock</a>
+            </div>
+        </div>
 
-        <h2>
-            Welcome <?php echo $_SESSION['user_email'] ?>
-        </h2>
-    </div>
+        <div class="jumbostron">
 
-    <h2>Result Table</h2>
-    <p>This show message from the contact page</p>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Subject</th>
-                <th>Message</th>
+            <h2>
+                Welcome <?php echo $_SESSION['user_email'] ?>
 
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            $query = "select * from messages";
-            $result = $db->query($query);
+            </h2>
+        </div>
 
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row = $result->fetch_assoc()) { ?>
-                    <tr>
-                        <td><?php echo $row["id"] ?></td>
-                        <td><?php echo $row["name"] ?></td>
-                        <td><?php echo $row["email"] ?></td>
-                        <td><?php echo $row["subject"] ?></td>
-                        <td><?php echo $row["message"] ?></td>
+        <h3>Result Table</h3>
+        <p>This show message from the contact page</p>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Message</th>
 
-                    </tr>
-                <?php }
-            } ?>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $query = "select * from messages";
+                $result = $db->query($query);
 
-            </tbody>
-        </table>
-    </div>
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo $row["id"] ?></td>
+                            <td><?php echo $row["name"] ?></td>
+                            <td><?php echo $row["email"] ?></td>
+                            <td><?php echo $row["subject"] ?></td>
+                            <td><?php echo $row["message"] ?></td>
+
+                        </tr>
+                    <?php }
+                } ?>
+
+                </tbody>
+            </table>
+        </div>
 
 
-</div><!-- /.container -->
+    </div><!-- /.container -->
 
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="./js/bootstrap.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
 
 </body>
 </html>
