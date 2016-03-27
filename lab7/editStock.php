@@ -13,7 +13,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include('includes/config.php');
 include('includes/db.php');
-
+global $db;
 
 if (isset($_POST['delete'])) {
     $_SESSION['sale_price'] = $_POST['sale_price'];
@@ -40,30 +40,23 @@ if (isset($_POST['submit'])) {
     $_SESSION['image_filename'] = $_POST['image_filename'];
     $_SESSION['text_desc'] = $_POST['text_desc'];
 
-
     $sale_price = mysqli_real_escape_string($db, $_POST['sale_price']);
     $product_name = mysqli_real_escape_string($db, $_POST['product_name']);
     $image_filename = mysqli_real_escape_string($db, $_POST['image_filename']);
     $text_desc = mysqli_real_escape_string($db, $_POST['text_desc']);
 
-    $query = "insert into products(sale_price,product_name,image_filename,text_desc) values('$sale_price','$product_name','$image_filename','$text_desc')";
-
+    $query = "INSERT INTO products(sale_price,product_name,image_filename,text_desc) VALUES('$sale_price','$product_name','$image_filename','$text_desc')";
 
     $db->query($query);
-
-
     header("Location:editStock.php?success=" . urldecode("stock added!"));
 
-
 }
-
 
 if (isset($_POST['update'])) {
     $_SESSION['sale_price'] = $_POST['sale_price'];
     $_SESSION['product_name'] = $_POST['product_name'];
     $_SESSION['image_filename'] = $_POST['image_filename'];
     $_SESSION['text_desc'] = $_POST['text_desc'];
-
 
     $sale_price = mysqli_real_escape_string($db, $_POST['sale_price']);
     $product_name = mysqli_real_escape_string($db, $_POST['product_name']);
@@ -72,22 +65,17 @@ if (isset($_POST['update'])) {
 
     // $query = "insert into products(sale_price,product_name,image_filename,text_desc) values('$sale_price','$product_name','$image_filename','$text_desc')";
 
-    // $query = "UPDATE products set (sale_price,product_name,image_filename,text_desc) values('$sale_price','$product_name','$image_filename','$text_desc')  WHERE id='$_POST[hidden]'";
+    // $query = "UPDATE products SET (sale_price,product_name,image_filename,text_desc) values('$sale_price','$product_name','$image_filename','$text_desc') WHERE id='$_POST[id]'";
     $query = "UPDATE products SET sale_price='$sale_price', product_name='$product_name', image_filename='$image_filename', text_desc='$text_desc' WHERE id='$_POST[id]'";
 
     $db->query($query);
-
-
-    header("Location:editStock.php?success=" . urldecode("value changed!"));
-
+    header("Location:editStock.php?success=" . urldecode("Table row updated!"));
 
 }
 if (!isset($_SESSION['user_email'])) {
     header("Location:login.php?err=" . urldecode("You need to login to view the stock page."));
     exit();
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +100,6 @@ if (!isset($_SESSION['user_email'])) {
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/shop-homepage.css" rel="stylesheet">
 
-    </script>
 
 </head>
 
@@ -178,9 +165,10 @@ if (!isset($_SESSION['user_email'])) {
     </div>
 </nav>
 
+
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-xs-6 col-lg-2">
             <p class="lead">NUIG Shop</p>
 
             <div class="list-group">
@@ -193,18 +181,16 @@ if (!isset($_SESSION['user_email'])) {
             </div>
         </div>
 
-        <div class="jumbostron">
+        <h2>
+            Welcome <?php echo $_SESSION['user_email'] ?>
 
-            <h2>
-                Welcome <?php echo $_SESSION['user_email'] ?>
-
-            </h2>
-        </div>
+        </h2>
 
 
-        <?php
+        <div class="col-xs-12 col-sm-6 col-lg-10">
+            <?php
 
-        echo " <h3>Result Table</h3>
+            echo " <h3>Result Table</h3>
         <p>This show message from the contact page</p>
         <div class=\"table-responsive\">
             <table class=\"table table-striped\" id=\"mytable\">
@@ -220,141 +206,151 @@ if (!isset($_SESSION['user_email'])) {
 
                 </tr>
                 </thead>";
-        $query = "select * from products";
-        $result = $db->query($query);
 
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-                echo "<form action=editStock.php method=post>";
-                echo "<tr>";
-                // echo "<td class=\"col-sm-1\">" . $row['id'] . " </td>";
-                echo "<td class=\"col-sm-1\">" . "<input type=text  readonly name=id value=" . $row['id'] . " </td>";
-                echo "<td class=\"col-sm-1\">" . "<input type=number name=sale_price value=" . $row['sale_price'] . " </td>";
-                echo "<td class=\"col-sm-3\">" . "<input type=text name=product_name value=" . $row['product_name'] . " </td>";
-                echo "<td class=\"col-sm-2\">" . "<input type=text name=text_desc value=" . $row['text_desc'] . " </td>";
-                echo "<td class=\"col-sm-5\">" . "<input type=text name=image_filename value=" . $row['image_filename'] . " </td>";
+            $query = "SELECT * FROM products";
+            $result = $db->query($query);
 
-                echo "<td>" . "<input type=submit name=update value=update" . " </td>";
-                echo "<td>" . "<input type=submit name=delete value=delete" . " </td>";
-                echo "</form>";
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    echo "<form action=editStock.php method=post>";
+                    echo "<tr>";
+                    // echo "<td class=\"col-sm-1\">" . $row['id'] . " </td>";
+                    echo "<td class=\"col-sm-1\">" . "<input type=text  readonly name=id value=" . $row['id'] . " </td>";
+                    echo "<td class=\"col-sm-1\">" . "<input type=number name=sale_price value=" . $row['sale_price'] . " </td>";
+                    echo "<td class=\"col-sm-3\">" . "<input type=text name=product_name value=" . $row['product_name'] . " </td>";
+                    echo "<td class=\"col-sm-2\">" . "<input type=text name=text_desc value=" . $row['text_desc'] . " </td>";
+                    echo "<td class=\"col-sm-5\">" . "<input type=text name=image_filename value=" . $row['image_filename'] . " </td>";
 
-                echo "</tr>";
-
-            }
-        } ?>
+                    echo "<td>" . "<input type=submit name=update value=update" . " </td>";
+                    echo "<td>" . "<input type=submit name=delete value=delete" . " </td>";
+                    echo "</form>";
+                    echo "</tr>";
 
 
-        </table>
+                }
+            } else {
+                echo "Zero record found";
+            } ?>
+
+            <?php if (isset($_GET['success'])) { ?>
+                <div class="alert alert-success fade-in"><a href="#" class="close" data-dismiss="alert"
+                                                            aria-label="close">&times;</a><?php echo $_GET['success'] ?>
+                </div>
+            <?php } ?>
 
 
-        <!-- Button to trigger modal -->
-        <a href="#myModal" role="button" data-toggle="modal" aria-hidden="true" class="btn btn-info btn-lg"><span
-                class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Stock</a>
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"> &times;</button>
-                        <h4 class="modal-title">Add Stock Form</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="alert alert-info"><a href="#" class="close" data-dismiss="alert"
-                                                                     aria-label="close">&times;</a>
-                                        File uploads on the nuig server is currently disabled
-                                    </div>
-                                    <form class="form-horizontal" action="" method="POST">
+            <!-- Button to trigger modal -->
+            <a href="#myModal" role="button" data-toggle="modal" aria-hidden="true" class="btn btn-info btn-lg"><span
+                    class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Stock</a>
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"> &times;</button>
+                            <h4 class="modal-title">Add Stock Form</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="alert alert-info"><a href="#" class="close" data-dismiss="alert"
+                                                                         aria-label="close">&times;</a>
+                                            File uploads on the nuig server is currently disabled
+                                        </div>
+                                        <form class="form-horizontal" action="" method="POST">
 
-                                        <fieldset>
+                                            <fieldset>
 
-                                            <div class="control-group">
-                                                <label class="control-label" for="username">Price</label>
-                                                <div class="controls">
-                                                    <input type="number" min="0" id="sale_price" name="sale_price"
-                                                           placeholder=""
-                                                           class="form-control input-lg">
-                                                    <p class="help-block">Please enter a Sale Price for the product</p>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="username">Price</label>
+                                                    <div class="controls">
+                                                        <input type="number" min="0" id="sale_price" name="sale_price"
+                                                               placeholder=""
+                                                               class="form-control input-lg">
+                                                        <p class="help-block">Please enter a Sale Price for the
+                                                            product</p>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="control-group">
-                                                <label class="control-label" for="email">Product name</label>
-                                                <div class="controls">
-                                                    <input type="text" id="product_name" name="product_name"
-                                                           placeholder=""
-                                                           class="form-control input-lg">
-                                                    <p class="help-block">Please enter a Product name</p>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="email">Product name</label>
+                                                    <div class="controls">
+                                                        <input type="text" id="product_name" name="product_name"
+                                                               placeholder=""
+                                                               class="form-control input-lg">
+                                                        <p class="help-block">Please enter a Product name</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="product">Product Description</label>
-                                                <div class="controls">
-                                                    <input type="text" id="text_desc" name="text_desc" placeholder=""
-                                                           class="form-control input-lg">
-                                                    <p class="help-block">Please enter a product description</p>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="product">Product
+                                                        Description</label>
+                                                    <div class="controls">
+                                                        <input type="text" id="text_desc" name="text_desc"
+                                                               placeholder=""
+                                                               class="form-control input-lg">
+                                                        <p class="help-block">Please enter a product description</p>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="control-group">
-                                                <label class="control-label" for="image file">Image File name</label>
-                                                <div class="controls">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="image file">Image File
+                                                        name</label>
+                                                    <div class="controls">
                                 <span class="btn btn-info btn-file">
                                  Browse <input type="file" name="image_filename">
                                                         </span>
 
-                                                    <p class="help-block">Allowed extensions (<code>jpeg</code>,
-                                                        <code>jpg</code>,
-                                                        <code>gif</code>, and <code>png</code>)</p>
+                                                        <p class="help-block">Allowed extensions (<code>jpeg</code>,
+                                                            <code>jpg</code>,
+                                                            <code>gif</code>, and <code>png</code>)</p>
+                                                    </div>
                                                 </div>
-                                            </div>
 
 
-                                            <div class="control-group">
-                                                <!-- Button -->
-                                                <div class="controls">
-                                                    <button class="btn btn-success" name="submit">Submit</button>
+                                                <div class="control-group">
+                                                    <!-- Button -->
+                                                    <div class="controls">
+                                                        <button class="btn btn-success" name="submit">Submit</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </fieldset>
-                                    </form>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+
                                 </div>
+                            </div><!-- End of Modal body -->
+                        </div><!-- End of Modal content -->
+                    </div><!-- End of Modal dialog -->
+                </div><!-- End of Modal -->
+            </div> <!-- /.container -->
+        </div>
 
-                            </div>
-                        </div><!-- End of Modal body -->
-                    </div><!-- End of Modal content -->
-                </div><!-- End of Modal dialog -->
-            </div><!-- End of Modal -->
-            <!-- /.container -->
-
-
-            <!--        <button class="demo btn btn-primary btn-lg" data-toggle="modal" href="#responsive">View Demo</button>-->
     </div>
 
-            <div class="container">
-                <hr>
-                <!-- Footer -->
 
-                <footer>
+    <div class="container">
+        <hr>
+        <!-- Footer -->
 
-                    <div class="col-lg-12">
-                        <p>Copyright &copy; Shane Cunningham 2015</p>
-                    </div>
+        <footer>
 
-                </footer>
+            <div class="col-lg-12">
+                <p>Copyright &copy; Shane Cunningham 2015</p>
             </div>
 
+        </footer>
+    </div>
 
-            <!-- Bootstrap core JavaScript
-            ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-            <script src="./js/bootstrap.js"></script>
-            <script src="./js/table.js"></script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/table.js"></script>
 
 </body>
 </html>
