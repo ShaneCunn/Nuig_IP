@@ -72,12 +72,30 @@ if (isset($_POST['update'])) {
     header("Location:editStock.php?success=" . urldecode("Table row updated!"));
 
 }
+
+
 if (!isset($_SESSION['user_email'])) {
     header("Location:login.php?err=" . urldecode("You need to login to view the stock page."));
     exit();
 }
 ?>
 
+
+<?php function auto_copyright($year = 'auto')
+{ ?>
+    <?php if (intval($year) == 'auto') {
+    $year = date('Y');
+} ?>
+    <?php if (intval($year) == date('Y')) {
+    echo intval($year);
+} ?>
+    <?php if (intval($year) < date('Y')) {
+    echo intval($year) . ' - ' . date('Y');
+} ?>
+    <?php if (intval($year) > date('Y')) {
+    echo date('Y');
+} ?>
+<?php } ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,9 +106,7 @@ if (!isset($_SESSION['user_email'])) {
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="./favicon.ico">
-
     <title>Account Details</title>
-
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -115,7 +131,7 @@ if (!isset($_SESSION['user_email'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="login.php">Administrator page for Nuig Shop</a>
+            <a class="navbar-brand" href="login.php">Administrator page for NUIG Shop</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -188,55 +204,59 @@ if (!isset($_SESSION['user_email'])) {
 
 
         <div class="col-xs-12 col-sm-6 col-lg-10">
-            <?php
+            <h3>Result Table</h3>
+            <p>This show message from the contact page</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped " id="mytable">
+                    <thead>
+                    <tr>
 
-            echo " <h3>Result Table</h3>
-        <p>This show message from the contact page</p>
-        <div class=\"table-responsive\">
-            <table class=\"table table-striped\" id=\"mytable\">
-                <thead>
-                <tr>
-                   
-                    <th>ID</th>
-                    <th>Sale Price</th>
-                    <th>Product Name</th>
-                    <th>Product Description</th>
-                    <th>Image File name</th>
+                        <th>ID</th>
+                        <th>Sale Price</th>
+                        <th>Product Name</th>
+                        <th>Product Description</th>
+                        <th>Image File name</th>
 
 
-                </tr>
-                </thead>";
-
-            $query = "SELECT * FROM products";
-            $result = $db->query($query);
-
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo "<form action=editStock.php method=post>";
-                    echo "<tr>";
-                    // echo "<td class=\"col-sm-1\">" . $row['id'] . " </td>";
-                    echo "<td class=\"col-sm-1\">" . "<input type=text  readonly name=id value=" . $row['id'] . " </td>";
-                    echo "<td class=\"col-sm-1\">" . "<input type=number name=sale_price value=" . $row['sale_price'] . " </td>";
-                    echo "<td class=\"col-sm-3\">" . "<input type=text name=product_name value=" . $row['product_name'] . " </td>";
-                    echo "<td class=\"col-sm-2\">" . "<input type=text name=text_desc value=" . $row['text_desc'] . " </td>";
-                    echo "<td class=\"col-sm-5\">" . "<input type=text name=image_filename value=" . $row['image_filename'] . " </td>";
-
-                    echo "<td>" . "<input type=submit name=update value=update" . " </td>";
-                    echo "<td>" . "<input type=submit name=delete value=delete" . " </td>";
-                    echo "</form>";
-                    echo "</tr>";
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
 
 
-                }
-            } else {
-                echo "Zero record found";
-            } ?>
+                    $query = "SELECT * FROM products";
+                    $result = $db->query($query);
 
-            <?php if (isset($_GET['success'])) { ?>
-                <div class="alert alert-success fade-in"><a href="#" class="close" data-dismiss="alert"
-                                                            aria-label="close">&times;</a><?php echo $_GET['success'] ?>
-                </div>
+                    if ($result->num_rows > 0) {
+                        // output data of each row
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<form action=editStock.php method=post>";
+                            echo "<tr>";
+                            echo "<td class=\"col-sm-1\">" . "<input type=text  class=\"form-control\" readonly name=id value=" . $row['id'] . " </td>";
+                            echo "<td class=\"col-sm-2\">" . "<input type=number class=\"form-control\" name=sale_price value=" . $row['sale_price'] . " </td>";
+                            echo "<td class=\"col-sm-2\">" . "<input type=text class=\"form-control\" name=product_name value=" . $row['product_name'] . " </td>";
+                            echo "<td class=\"col-sm-4\">" . "<input type=text class=\"form-control\" name=text_desc value=" . $row['text_desc'] . " </td>";
+                            echo "<td class=\"col-sm-3\">" . "<input type=text class=\"form-control\" name=image_filename value=" . $row['image_filename'] . " </td>";
+
+                            echo "<td><p data-placement=\"top\" data-toggle=\"tooltip\" title=\"Edit\"><button class=\"btn btn-primary btn-xs\" data-title=\"Edit\" type=submit name=update data-toggle=\"modal\" data-target=\"#edit\" ><span class=\"glyphicon glyphicon-pencil\"></span></button></p></td>";
+                            echo "<td><p data-placement=\"top\" data-toggle=\"tooltip\" title=\"Delete\"><button class=\"btn btn-danger btn-xs\" type=submit name=delete data-title=\"Delete\" data-toggle=\"modal\" data-target=\"#delete\" ><span class=\"glyphicon glyphicon-trash\"></span></button></p></td>";
+
+                            echo "</form>";
+                            echo "</tr>";
+
+
+                        }
+                    } else {
+                        echo "Zero record found";
+                    } ?>
+
+                    <?php if (isset($_GET['success'])) { ?>
+                    <div class="alert alert-success fade-in"><a href="#" class="close" data-dismiss="alert"
+                                                                aria-label="close">&times;</a><?php echo $_GET['success'] ?>
+                    </div>
+            </div>
+            </tbody> </table>
+            </table>
             <?php } ?>
 
 
@@ -329,20 +349,7 @@ if (!isset($_SESSION['user_email'])) {
         </div>
 
     </div>
-
-
-    <div class="container">
-        <hr>
-        <!-- Footer -->
-
-        <footer>
-
-            <div class="col-lg-12">
-                <p>Copyright &copy; Shane Cunningham 2015</p>
-            </div>
-
-        </footer>
-    </div>
+    <!-- Footer -->
 
 
     <!-- Bootstrap core JavaScript
