@@ -23,35 +23,22 @@ if (isset($_GET['delete_id'])) {
     header("Location:editStock.php");
 }
 
+if (isset($_GET['edit_id'])) {
+
+
+    $query = "UPDATE FROM products WHERE id=" . $_GET['edit_id'];
+    $result = $db->query($query);
+    //  mysql_query($sql_query);
+    header("Location:changeStock.php");
+}
+
 
 if (isset($_POST['submit'])) {
     $_SESSION['sale_price'] = $_POST['sale_price'];
     $_SESSION['product_name'] = $_POST['product_name'];
     $_SESSION['image_filename'] = $_POST['image_filename'];
     $_SESSION['text_desc'] = $_POST['text_desc'];
-    /*   if (strlen($_POST['name']) < 3) {
-           header("Location:register.php?err=" . urlencode("The name must be 3 characters long"));
-           exit();
-   
-       } else if ($_POST['password'] != $_POST['confirm_password']) {
-           header("Location:register.php?err=" . urlencode("The password and confirm password must match"));
-           exit();
-       } else if (strlen($_POST['confirm_password']) < 5) {
-           header("Location:register.php?err=" . urlencode("The password must be greater than 5 characters long"));
-           exit();
-       } elseif (strlen($_POST['confirm_password']) < 5) {
-           header("Location:register.php?err=" . urlencode("The confirm password must be greater than 5 characters long"));
-           exit();
-       } elseif (!isUnique($_POST['email'])) {
-           header("Location:register.php?err=" . urlencode("The email is already in use. Please enter a different email"));
-           exit();
-   
-       } else {*/
 
-    /*  $name = mysqli_real_escape_string($db, $_POST['name']);
-      $email = mysqli_real_escape_string($db, $_POST['email']);
-      $password = mysqli_real_escape_string($db, $_POST['password']);
-      $token = bin2hex(openssl_random_pseudo_bytes(32));*/
 
     $sale_price = mysqli_real_escape_string($db, $_POST['sale_price']);
     $product_name = mysqli_real_escape_string($db, $_POST['product_name']);
@@ -62,12 +49,9 @@ if (isset($_POST['submit'])) {
 
 
     $db->query($query);
-    //  $messsage = "Hi $name! account created, here is the activation link: http://nuig.brtd.net/registration/activate.php?token=$token";
 
 
     header("Location:editStock.php?success=" . urldecode("stock added!"));
-
-    //}
 
 
 }
@@ -105,6 +89,14 @@ if (!isset($_SESSION['user_email'])) {
         function delete_id(id) {
             if (confirm('Sure To Remove This Record ?')) {
                 window.location.href = 'editStock.php?delete_id=' + id;
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function edit_id(id) {
+            if (confirm('Sure To edit This Record ?')) {
+                window.location.href = 'changeStock.php?edit_id=' + id;
             }
         }
     </script>
@@ -206,8 +198,9 @@ if (!isset($_SESSION['user_email'])) {
                     <th>ID</th>
                     <th>Sale Price</th>
                     <th>Product Name</th>
-                    <th>Image File name</th>
                     <th>Product Description</th>
+                    <th>Image File name</th>
+
 
                 </tr>
                 </thead>
@@ -220,12 +213,21 @@ if (!isset($_SESSION['user_email'])) {
                     // output data of each row
                     while ($row = $result->fetch_assoc()) { ?>
                         <tr>
-                            <td><input type="checkbox" class="checkthis"/></td>
+                            echo "<td class="col-sm-1">" . "<input type=text name=sale_price value=" . $row['sale_price'] . " </td>";
                             <td class="col-sm-1"><?php echo $row["id"] ?></td>
                             <td class="col-sm-1"><?php echo $row["sale_price"] ?></td>
                             <td class="col-sm-3"><?php echo $row["product_name"] ?></td>
-                            <td class="col-sm-2"><?php echo $row["image_filename"] ?></td>
                             <td class="col-sm-5"><?php echo $row["text_desc"] ?></td>
+                            <td class="col-sm-2"><?php echo $row["image_filename"] ?></td>
+                            <td>
+
+                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                    <a href="javascript:edit_id(<?php echo $row["id"]; ?>)">
+                                        <button class="btn btn-info btn-xs" data-title="Edit" data-toggle="modal"
+                                                data-target="#edit"><span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                    </button></p>
+                            </td>
                             <td>
                                 <p data-placement="top" data-toggle="tooltip" title="Delete">
                                     <a href="javascript:delete_id(<?php echo $row["id"]; ?>)">
@@ -273,12 +275,19 @@ if (!isset($_SESSION['user_email'])) {
                                     <p class="help-block">Please enter a Product name</p>
                                 </div>
                             </div>
-
+                            <div class="control-group">
+                                <label class="control-label" for="product">Product Description</label>
+                                <div class="controls">
+                                    <input type="text" id="text_desc" name="text_desc" placeholder=""
+                                           class="form-control input-lg">
+                                    <p class="help-block">Please enter a product description</p>
+                                </div>
+                            </div>
 
                             <div class="control-group">
                                 <label class="control-label" for="image file">Image File name</label>
                                 <div class="controls">
-                                <span class="btn btn-default btn-file">
+                                <span class="btn btn-info btn-file">
                                  Browse <input type="file" name="image_filename">
                                                         </span>
 
@@ -287,14 +296,6 @@ if (!isset($_SESSION['user_email'])) {
                                 </div>
                             </div>
 
-                            <div class="control-group">
-                                <label class="control-label" for="product">Product Description</label>
-                                <div class="controls">
-                                    <input type="text" id="text_desc" name="text_desc" placeholder=""
-                                           class="btn btn-default btn-file">
-                                    <p class="help-block">Please confirm password</p>
-                                </div>
-                            </div>
 
                             <div class="control-group">
                                 <!-- Button -->
@@ -309,6 +310,37 @@ if (!isset($_SESSION['user_email'])) {
             </div>
         </div>
         <!-- /.container -->
+
+        <div class="container">
+
+            <div id="responsive" class="modal fade" tabindex="-1" style="display: none;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Responsive</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <h4>Some Input</h4>
+                        <p><input class="form-control" type="text"></p>
+                        <p><input class="form-control" type="text"></p>
+                        <p><input class="form-control" type="text"></p>
+                        <p><input class="form-control" type="text"></p>
+                        <p><input class="form-control" type="text"></p>
+                        <p><input class="form-control" type="text"></p>
+                        <p><input class="form-control" type="text"></p>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="demo btn btn-primary btn-lg" data-toggle="modal" href="#responsive">View Demo</button>
 
         <div class="container">
             <hr>
