@@ -14,22 +14,23 @@ error_reporting(E_ALL);
 include('includes/config.php');
 include('includes/db.php');
 
-if (isset($_GET['delete_id'])) {
+
+if (isset($_POST['delete'])) {
+    $_SESSION['sale_price'] = $_POST['sale_price'];
+    $_SESSION['product_name'] = $_POST['product_name'];
+    $_SESSION['image_filename'] = $_POST['image_filename'];
+    $_SESSION['text_desc'] = $_POST['text_desc'];
 
 
-    $query = "DELETE FROM products WHERE id=" . $_GET['delete_id'];
+    $sale_price = mysqli_real_escape_string($db, $_POST['sale_price']);
+    $product_name = mysqli_real_escape_string($db, $_POST['product_name']);
+    $image_filename = mysqli_real_escape_string($db, $_POST['image_filename']);
+    $text_desc = mysqli_real_escape_string($db, $_POST['text_desc']);
+
+    $query = "DELETE FROM products WHERE id='$_POST[id]'";
     $result = $db->query($query);
     //  mysql_query($sql_query);
-    header("Location:editStock.php");
-}
-
-if (isset($_GET['edit_id'])) {
-
-
-    $query = "UPDATE FROM products WHERE id=" . $_GET['edit_id'];
-    $result = $db->query($query);
-    //  mysql_query($sql_query);
-    header("Location:changeStock.php");
+    header("Location:editStock.php?success=" . urldecode("stock deleted!"));
 }
 
 
@@ -56,6 +57,31 @@ if (isset($_POST['submit'])) {
 
 }
 
+
+if (isset($_POST['update'])) {
+    $_SESSION['sale_price'] = $_POST['sale_price'];
+    $_SESSION['product_name'] = $_POST['product_name'];
+    $_SESSION['image_filename'] = $_POST['image_filename'];
+    $_SESSION['text_desc'] = $_POST['text_desc'];
+
+
+    $sale_price = mysqli_real_escape_string($db, $_POST['sale_price']);
+    $product_name = mysqli_real_escape_string($db, $_POST['product_name']);
+    $image_filename = mysqli_real_escape_string($db, $_POST['image_filename']);
+    $text_desc = mysqli_real_escape_string($db, $_POST['text_desc']);
+
+    // $query = "insert into products(sale_price,product_name,image_filename,text_desc) values('$sale_price','$product_name','$image_filename','$text_desc')";
+
+    // $query = "UPDATE products set (sale_price,product_name,image_filename,text_desc) values('$sale_price','$product_name','$image_filename','$text_desc')  WHERE id='$_POST[hidden]'";
+    $query = "UPDATE products SET sale_price='$sale_price', product_name='$product_name', image_filename='$image_filename', text_desc='$text_desc' WHERE id='$_POST[id]'";
+
+    $db->query($query);
+
+
+    header("Location:editStock.php?success=" . urldecode("value changed!"));
+
+
+}
 if (!isset($_SESSION['user_email'])) {
     header("Location:login.php?err=" . urldecode("You need to login to view the stock page."));
     exit();
@@ -85,20 +111,7 @@ if (!isset($_SESSION['user_email'])) {
     <link href="css/starter-template.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/shop-homepage.css" rel="stylesheet">
-    <script type="text/javascript">
-        function delete_id(id) {
-            if (confirm('Sure To Remove This Record ?')) {
-                window.location.href = 'editStock.php?delete_id=' + id;
-            }
-        }
-    </script>
 
-    <script type="text/javascript">
-        function edit_id(id) {
-            if (confirm('Sure To edit This Record ?')) {
-                window.location.href = 'changeStock.php?edit_id=' + id;
-            }
-        }
     </script>
 
 </head>
@@ -188,13 +201,16 @@ if (!isset($_SESSION['user_email'])) {
             </h2>
         </div>
 
-        <h3>Result Table</h3>
+
+        <?php
+
+        echo " <h3>Result Table</h3>
         <p>This show message from the contact page</p>
-        <div class="table-responsive">
-            <table class="table table-striped" id="mytable">
+        <div class=\"table-responsive\">
+            <table class=\"table table-striped\" id=\"mytable\">
                 <thead>
                 <tr>
-                    <th><input type="checkbox" id="checkall"/></th>
+                   
                     <th>ID</th>
                     <th>Sale Price</th>
                     <th>Product Name</th>
@@ -203,165 +219,142 @@ if (!isset($_SESSION['user_email'])) {
 
 
                 </tr>
-                </thead>
-                <tbody>
-                <?php
-                $query = "select * from products";
-                $result = $db->query($query);
+                </thead>";
+        $query = "select * from products";
+        $result = $db->query($query);
 
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) { ?>
-                        <tr>
-                            echo "<td class="col-sm-1">" . "<input type=text name=sale_price value=" . $row['sale_price'] . " </td>";
-                            <td class="col-sm-1"><?php echo $row["id"] ?></td>
-                            <td class="col-sm-1"><?php echo $row["sale_price"] ?></td>
-                            <td class="col-sm-3"><?php echo $row["product_name"] ?></td>
-                            <td class="col-sm-5"><?php echo $row["text_desc"] ?></td>
-                            <td class="col-sm-2"><?php echo $row["image_filename"] ?></td>
-                            <td>
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "<form action=editStock.php method=post>";
+                echo "<tr>";
+                // echo "<td class=\"col-sm-1\">" . $row['id'] . " </td>";
+                echo "<td class=\"col-sm-1\">" . "<input type=text  readonly name=id value=" . $row['id'] . " </td>";
+                echo "<td class=\"col-sm-1\">" . "<input type=number name=sale_price value=" . $row['sale_price'] . " </td>";
+                echo "<td class=\"col-sm-3\">" . "<input type=text name=product_name value=" . $row['product_name'] . " </td>";
+                echo "<td class=\"col-sm-2\">" . "<input type=text name=text_desc value=" . $row['text_desc'] . " </td>";
+                echo "<td class=\"col-sm-5\">" . "<input type=text name=image_filename value=" . $row['image_filename'] . " </td>";
 
-                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                    <a href="javascript:edit_id(<?php echo $row["id"]; ?>)">
-                                        <button class="btn btn-info btn-xs" data-title="Edit" data-toggle="modal"
-                                                data-target="#edit"><span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
-                                    </button></p>
-                            </td>
-                            <td>
-                                <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                    <a href="javascript:delete_id(<?php echo $row["id"]; ?>)">
-                                        <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
-                                                data-target="#delete"><span class="glyphicon glyphicon-trash"></span>
-                                    </a>
-                                    </button>
-                                </p>
-                            </td>
-                        </tr>
-                    <?php }
-                } ?>
+                echo "<td>" . "<input type=submit name=update value=update" . " </td>";
+                echo "<td>" . "<input type=submit name=delete value=delete" . " </td>";
+                echo "</form>";
 
-                </tbody>
-            </table>
+                echo "</tr>";
+
+            }
+        } ?>
 
 
-        </div><!-- /.container -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="alert alert-info"><a href="#" class="close" data-dismiss="alert"
-                                                     aria-label="close">&times;</a>
-                        File uploads on the nuig server is currently disabled
+        </table>
+
+
+        <!-- Button to trigger modal -->
+        <a href="#myModal" role="button" data-toggle="modal" aria-hidden="true" class="btn btn-info btn-lg"><span
+                class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Stock</a>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"> &times;</button>
+                        <h4 class="modal-title">Add Stock Form</h4>
                     </div>
-                    <form class="form-horizontal" action="" method="POST">
-                        <fieldset>
-                            <div id="legend">
-                                <legend class="">add stock</legend>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="username">Price</label>
-                                <div class="controls">
-                                    <input type="number" min="0" id="sale_price" name="sale_price" placeholder=""
-                                           class="form-control input-lg">
-                                    <p class="help-block">Please enter a Sale Price for the product</p>
-                                </div>
-                            </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="alert alert-info"><a href="#" class="close" data-dismiss="alert"
+                                                                     aria-label="close">&times;</a>
+                                        File uploads on the nuig server is currently disabled
+                                    </div>
+                                    <form class="form-horizontal" action="" method="POST">
 
-                            <div class="control-group">
-                                <label class="control-label" for="email">Product name</label>
-                                <div class="controls">
-                                    <input type="text" id="product_name" name="product_name" placeholder=""
-                                           class="form-control input-lg">
-                                    <p class="help-block">Please enter a Product name</p>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="product">Product Description</label>
-                                <div class="controls">
-                                    <input type="text" id="text_desc" name="text_desc" placeholder=""
-                                           class="form-control input-lg">
-                                    <p class="help-block">Please enter a product description</p>
-                                </div>
-                            </div>
+                                        <fieldset>
 
-                            <div class="control-group">
-                                <label class="control-label" for="image file">Image File name</label>
-                                <div class="controls">
+                                            <div class="control-group">
+                                                <label class="control-label" for="username">Price</label>
+                                                <div class="controls">
+                                                    <input type="number" min="0" id="sale_price" name="sale_price"
+                                                           placeholder=""
+                                                           class="form-control input-lg">
+                                                    <p class="help-block">Please enter a Sale Price for the product</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="email">Product name</label>
+                                                <div class="controls">
+                                                    <input type="text" id="product_name" name="product_name"
+                                                           placeholder=""
+                                                           class="form-control input-lg">
+                                                    <p class="help-block">Please enter a Product name</p>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="product">Product Description</label>
+                                                <div class="controls">
+                                                    <input type="text" id="text_desc" name="text_desc" placeholder=""
+                                                           class="form-control input-lg">
+                                                    <p class="help-block">Please enter a product description</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group">
+                                                <label class="control-label" for="image file">Image File name</label>
+                                                <div class="controls">
                                 <span class="btn btn-info btn-file">
                                  Browse <input type="file" name="image_filename">
                                                         </span>
 
-                                    <p class="help-block">Allowed extensions (<code>jpeg</code>, <code>jpg</code>,
-                                        <code>gif</code>, and <code>png</code>)</p>
+                                                    <p class="help-block">Allowed extensions (<code>jpeg</code>,
+                                                        <code>jpg</code>,
+                                                        <code>gif</code>, and <code>png</code>)</p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="control-group">
+                                                <!-- Button -->
+                                                <div class="controls">
+                                                    <button class="btn btn-success" name="submit">Submit</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
                                 </div>
+
                             </div>
+                        </div><!-- End of Modal body -->
+                    </div><!-- End of Modal content -->
+                </div><!-- End of Modal dialog -->
+            </div><!-- End of Modal -->
+            <!-- /.container -->
 
 
-                            <div class="control-group">
-                                <!-- Button -->
-                                <div class="controls">
-                                    <button class="btn btn-success" name="submit">Submit</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
+            <!--        <button class="demo btn btn-primary btn-lg" data-toggle="modal" href="#responsive">View Demo</button>-->
+    </div>
 
-                </div>
-            </div>
-        </div>
-        <!-- /.container -->
+            <div class="container">
+                <hr>
+                <!-- Footer -->
 
-        <div class="container">
+                <footer>
 
-            <div id="responsive" class="modal fade" tabindex="-1" style="display: none;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Responsive</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-
-                        <h4>Some Input</h4>
-                        <p><input class="form-control" type="text"></p>
-                        <p><input class="form-control" type="text"></p>
-                        <p><input class="form-control" type="text"></p>
-                        <p><input class="form-control" type="text"></p>
-                        <p><input class="form-control" type="text"></p>
-                        <p><input class="form-control" type="text"></p>
-                        <p><input class="form-control" type="text"></p>
-
-
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Shane Cunningham 2015</p>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
+                </footer>
             </div>
-        </div>
-
-        <button class="demo btn btn-primary btn-lg" data-toggle="modal" href="#responsive">View Demo</button>
-
-        <div class="container">
-            <hr>
-            <!-- Footer -->
-
-            <footer>
-
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Shane Cunningham 2015</p>
-                </div>
-
-            </footer>
-        </div>
 
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="./js/bootstrap.js"></script>
-        <script src="./js/table.js"></script>
+            <!-- Bootstrap core JavaScript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="./js/bootstrap.js"></script>
+            <script src="./js/table.js"></script>
 
 </body>
 </html>

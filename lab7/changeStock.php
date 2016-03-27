@@ -30,7 +30,7 @@ if (isset($_POST['delete'])) {
     $query = "DELETE FROM products WHERE id='$_POST[hidden]'";
     $result = $db->query($query);
     //  mysql_query($sql_query);
-    header("Location:changeStock.php?success=". urldecode("stock deleted!"));
+    header("Location:editStock.php?success=". urldecode("stock deleted!"));
 }
 
 
@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
     $db->query($query);
 
 
-    header("Location:changeStock.php?success=" . urldecode("stock added!"));
+    header("Location:editStock.php?success=" . urldecode("stock added!"));
 
 
 }
@@ -79,7 +79,7 @@ if (isset($_POST['update'])) {
     $db->query($query);
 
 
-    header("Location:changeStock.php?success=" . urldecode("value changed!"));
+    header("Location:editStock.php?success=" . urldecode("value changed!"));
 
 
 }
@@ -123,7 +123,7 @@ if (!isset($_SESSION['user_email'])) {
     <script type="text/javascript">
         function edit_id(id) {
             if (confirm('Sure To edit This Record ?')) {
-                window.location.href = 'changeStock.php?edit_id=' + id;
+                window.location.href = 'editStock.php?edit_id=' + id;
             }
         }
     </script>
@@ -241,7 +241,7 @@ if (!isset($_SESSION['user_email'])) {
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                echo "<form action=changeStock.php method=post>";
+                echo "<form action=editStock.php method=post>";
                 echo "<tr>";
                 echo "<td>" . $row['id'] . " </td>";
                 echo "<td>" . "<input type=text name=sale_price value=" . $row['sale_price'] . " </td>";
