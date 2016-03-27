@@ -84,16 +84,7 @@ body {
     border-top-right-radius: 0;
 }
 
-form .form-control::-moz-placeholder {
-    color: #fff;
-    opacity: 1;
-}
-form .form-control:-ms-input-placeholder {
-    color: #fff;
-}
-form .form-control::-webkit-input-placeholder {
-    color: #fff;
-}
+
 
 .btn-file {
     position: relative;

@@ -159,7 +159,7 @@ if (!isset($_SESSION['user_email'])) {
                     <a href="clock.html">Clock</a>
                 </li>
                 <li class="active">
-                    <a href="editStock.php">stock</a>
+                    <a href="editStock.php">Stock</a>
                 </li>
 
                 <li>
