@@ -83,7 +83,11 @@ if (!isset($_SESSION['user_email'])) {
                 <li>
                     <a href="clock.html">Clock</a>
                 </li>
-
+                <?php if (isset($_SESSION['user_email'])) { ?>
+                <li>
+                    <a href="editStock.php">Stock</a>
+                </li>
+                <?php } ?>
 
                 <li class="active">
                     <a href="showContactUs.php">Administrator panel</a>

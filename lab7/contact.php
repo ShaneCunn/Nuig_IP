@@ -190,10 +190,16 @@ if (isset($_POST["submit"])) {
                 <li>
                     <a href="clock.html">Clock</a>
                 </li>
-                <li>
-                    <a href="login.php">Login</a>
-                </li>
 
+                <?php if (!isset($_SESSION['user_email'])) { ?>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
+                <?php } ?>
+
+                <?php if (isset($_SESSION['user_email'])) { ?>
+                    <li><a href="editStock.php">Stock</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php } ?>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container -->

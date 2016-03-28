@@ -159,7 +159,7 @@ if (isset($_POST['register'])) {
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <p class="lead">NUIG Shop</p>
+            <p class="lead"   style="padding-top:35px">NUIG Shop</p>
 
             <div class="list-group">
                 <a class="list-group-item" href="index.html">Home</a>
@@ -211,6 +211,18 @@ if (isset($_POST['register'])) {
     </div>
 
 </div><!-- /.container -->
+<div class="container">
+    <hr>
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="col-lg-12">
+            <p>Copyright &copy; Shane Cunningham 2015</p>
+        </div>
+
+    </footer>
+</div>
 
 
 <!-- Bootstrap core JavaScript

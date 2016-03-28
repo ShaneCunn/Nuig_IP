@@ -52,8 +52,44 @@ include('includes/db.php');
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="contact.php">Contact</a>
+                </li>
+
+                <li>
+                    <a href="special_offers.html">Special Offers</a>
+                </li>
+
+                <li>
+                    <a href="links.html">Useful links</a>
+                </li>
+                <li>
+                    <a href="clock.html">Clock</a>
+                </li>
+                <li>
+                    <a href="editStock.php">Stock</a>
+                </li>
+
+                <li>
+                    <a href="showContactUs.php">Administrator panel</a>
+                </li>
+
+                <?php if (!isset($_SESSION['user_email'])) { ?>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
+                <?php } ?>
+
+                <?php if (isset($_SESSION['user_email'])) { ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php } ?>
                 
             </ul>
         </div><!--/.nav-collapse -->
@@ -73,6 +109,7 @@ include('includes/db.php');
                 <a class="list-group-item" href="special_offers.html">Special Offers</a>
                 <a class="list-group-item" href="links.html">Useful links</a>
                 <a class="list-group-item" href="clock.html">Clock</a>
+
             </div>
         </div>
 
