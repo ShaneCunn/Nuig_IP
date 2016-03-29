@@ -22,6 +22,10 @@ if (isset($_POST['submit'])) {
     $query = "INSERT INTO products(sale_price,product_name,image_filename,text_desc) VALUES('$sale_price','$product_name','$image_filename','$text_desc')";
 
     $db->query($query);
+    // Closing the connection as a best practice
+
+    mysqli_close($db);
+
     header("Location:editStock.php?success=" . urldecode("stock added!"));
 
 }

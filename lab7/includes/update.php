@@ -24,6 +24,10 @@ if (isset($_POST['update'])) {
     $query = "UPDATE products SET sale_price='$sale_price', product_name='$product_name', image_filename='$image_filename', text_desc='$text_desc' WHERE id='$_POST[id]'";
 
     $db->query($query);
+
+    // Closing the connection as a best practice
+    mysqli_close($db);
+
     header("Location:editStock.php?success=" . urldecode("Table row updated!"));
 
 }

@@ -15,4 +15,8 @@ function isUnique($email)
         return false;
 
     } else return true;
+    // Closing the connection as a best practice
+
+    mysqli_close($db);
+
 }

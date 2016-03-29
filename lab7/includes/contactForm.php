@@ -56,10 +56,7 @@ if (isset($_POST["submit"])) {
     // If there are no errors, it then sends the email
     if (!$errName && !$errEmail && !$errSubject && !$errMessage && !$errHuman) {
 
-
         if (mail($to, $subject, $body, $from)) {
-
-            echo "hello";
 
             $name = mysqli_real_escape_string($db, $_POST['name']);
             $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -82,5 +79,8 @@ if (isset($_POST["submit"])) {
             exit();
         }
     }
+
+    // Closing the connection as a best practice
+    mysqli_close($db);
 
 }

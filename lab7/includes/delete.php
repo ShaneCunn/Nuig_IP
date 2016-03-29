@@ -22,6 +22,9 @@ if (isset($_POST['delete'])) {
 
     $query = "DELETE FROM products WHERE id='$_POST[id]'";
     $result = $db->query($query);
-    //  mysql_query($sql_query);
+    // Closing the connection as a best practice
+
+    mysqli_close($db);
+
     header("Location:editStock.php?success=" . urldecode("stock deleted!"));
 }

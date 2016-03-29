@@ -37,6 +37,10 @@ if (isset($_POST['register'])) {
 
         mail($email, 'Activate account', $messsage, 'From: mayhem2277@gmail.com');
         header("Location:login.php?success=" . urldecode("Activation email sent!"));
+        // Closing the connection as a best practice
+
+        mysqli_close($db);
+
 
     }
 
