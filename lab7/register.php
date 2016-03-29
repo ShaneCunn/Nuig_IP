@@ -29,10 +29,4 @@ include('includes/template/registerForm.php');
 
 // The Footer area
 include('includes/template/footer.php');
-?>
-
-
-
-
-
 
