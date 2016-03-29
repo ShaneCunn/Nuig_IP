@@ -1,4 +1,4 @@
-<form class="form-signin" action="register.php" method="post">
+<form class="form-signin" action="/lab7/register.php" method="post">
     <h2 class="form-signin-heading">Register Here</h2>
 
     <?php if (isset($_GET['err'])) { ?>

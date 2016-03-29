@@ -23,6 +23,8 @@
         </thead>
         <tbody>
         <?php
+        global $db;
+
         $query = "select * from messages";
         $result = $db->query($query);
 

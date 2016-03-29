@@ -15,6 +15,7 @@ error_reporting(E_ALL);
 
 
 if(isset($_GET['token'])){
+    global $db;
 
     $token = $_GET['token'];
     $query = "update users set status='1' where token='$token'";

@@ -21,13 +21,15 @@
             </thead>
             <tbody>
             <?php
+            global $db;
+
             $query = "SELECT * FROM products LIMIT 0,20";
             $result = $db->query($query);
 
             if ($result->num_rows > 0) {
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
-                    echo "<form action=editStock.php method=post>";
+                    echo "<form action=/lab7/editStock.php method=post>";
                     echo "<tr>";
                     echo "<td class=\"col-sm-1\">" . "<input type=text  class=\"form-control\" readonly name=id value=" . $row['id'] . " </td>";
                     echo "<td class=\"col-sm-2\">" . "<input type=number class=\"form-control\" name=sale_price value=" . $row['sale_price'] . " </td>";

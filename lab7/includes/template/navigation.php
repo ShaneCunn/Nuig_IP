@@ -9,48 +9,48 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="login.php">Administrator page for NUIG Shop</a>
+            <a class="navbar-brand" href="/lab7/login.php">Administrator page for NUIG Shop</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
 
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="/lab7/index.html">Home</a>
                 </li>
 
                 <li>
-                    <a href="about.html">About</a>
+                    <a href="/lab7/about.html">About</a>
                 </li>
 
                 <li>
-                    <a href="contact.php">Contact</a>
+                    <a href="/lab7/contact.php">Contact</a>
                 </li>
 
                 <li>
-                    <a href="special_offers.html">Special Offers</a>
+                    <a href="/lab7/special_offers.html">Special Offers</a>
                 </li>
 
                 <li>
-                    <a href="links.html">Useful links</a>
+                    <a href="/lab7/links.html">Useful links</a>
                 </li>
                 <li>
-                    <a href="clock.html">Clock</a>
+                    <a href="/lab7/clock.html">Clock</a>
                 </li>
                 <li <?php echo $link1; ?>>
-                    <a href="editStock.php">Stock</a>
+                    <a href="/lab7/editStock.php">Stock</a>
                 </li>
 
                 <li <?php echo $link2; ?>>
-                    <a href="showContactUs.php">Administrator panel</a>
+                    <a href="/lab7/showContactUs.php">Administrator panel</a>
                 </li>
 
                 <?php if (!isset($_SESSION['user_email'])) { ?>
-                    <li <?php echo $link3; ?>><a href="login.php">Login</a></li>
-                    <li <?php echo $link4; ?>><a href="register.php">Register</a></li>
+                    <li <?php echo $link3; ?>><a href="/lab7/login.php">Login</a></li>
+                    <li <?php echo $link4; ?>><a href="/lab7/register.php">Register</a></li>
                 <?php } ?>
 
                 <?php if (isset($_SESSION['user_email'])) { ?>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><a href="/lab7/logout.php">Logout</a></li>
                 <?php } ?>
             </ul>
         </div><!--/.nav-collapse -->
@@ -63,11 +63,11 @@
             <p class="lead">NUIG Shop</p>
 
             <div class="list-group">
-                <a class="list-group-item" href="index.html">Home</a>
-                <a class="list-group-item" href="about.html">About</a>
-                <a class="list-group-item" href="contact.php">Contact</a>
-                <a class="list-group-item" href="special_offers.html">Special Offers</a>
-                <a class="list-group-item" href="links.html">Useful links</a>
-                <a class="list-group-item" href="clock.html">Clock</a>
+                <a class="list-group-item" href="/lab7/index.html">Home</a>
+                <a class="list-group-item" href="/lab7/about.html">About</a>
+                <a class="list-group-item" href="/lab7/contact.php">Contact</a>
+                <a class="list-group-item" href="/lab7/special_offers.html">Special Offers</a>
+                <a class="list-group-item" href="/lab7/links.html">Useful links</a>
+                <a class="list-group-item" href="/lab7/clock.html">Clock</a>
             </div>
         </div>

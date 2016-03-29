@@ -7,6 +7,8 @@
  */
 
 if (isset($_POST['delete'])) {
+    global $db;
+
     $_SESSION['sale_price'] = $_POST['sale_price'];
     $_SESSION['product_name'] = $_POST['product_name'];
     $_SESSION['image_filename'] = $_POST['image_filename'];

@@ -23,6 +23,8 @@ if (isset($_POST['register'])) {
         exit();
 
     } else {
+        global $db;
+
         $name = mysqli_real_escape_string($db, $_POST['name']);
         $email = mysqli_real_escape_string($db, $_POST['email']);
         $password = mysqli_real_escape_string($db, $_POST['password']);

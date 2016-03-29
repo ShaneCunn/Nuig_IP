@@ -20,6 +20,7 @@ if (isset($_SESSION['user_email'])) {
 }
 
 if (isset($_POST['login'])) {
+    global $db;
 
     $email = mysqli_real_escape_string($db, $_POST['email']);
     $password = mysqli_real_escape_string($db, $_POST['password']);

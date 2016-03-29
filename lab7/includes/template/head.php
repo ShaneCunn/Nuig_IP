@@ -7,16 +7,16 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./favicon.ico">
+    <link rel="icon" href="/lab7/favicon.ico">
     <title><?php echo $document_title_tag; ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/lab7/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/starter-template.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="/lab7/css/starter-template.css" rel="stylesheet">
+    <link href="/lab7/css/custom.css" rel="stylesheet">
+    <link href="/lab7/css/shop-homepage.css" rel="stylesheet">
 
 
 </head>

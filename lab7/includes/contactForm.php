@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST["submit"])) {
     //variables taken in from the contact form
-
+    global $db;
     $name = mysqli_real_escape_string($db, $_POST['name']);
     $email = mysqli_real_escape_string($db, $_POST['email']);
     $message = mysqli_real_escape_string($db, $_POST['message']);
