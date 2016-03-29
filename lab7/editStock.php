@@ -6,7 +6,9 @@ error_reporting(E_ALL);
 include('includes/config.php');
 include('includes/db.php');
 global $db;
-
+$document_title_tag = 'Stock control Panel';
+$link1 =  'class="active"';
+$link2 =  null;
 // Database functions
 // The Delete function
 include('includes/delete.php');
@@ -28,4 +30,5 @@ include('includes/template/table.php');
 //The add stock form
 include('includes/template/addStock.php');
 // The Footer area
-include('includes/template/footer.php');
+include('includes/template/noFooter.php');
+

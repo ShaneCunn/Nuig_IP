@@ -1,6 +1,7 @@
 <!-- Button to trigger modal -->
 <a href="#myModal" role="button" data-toggle="modal" aria-hidden="true" class="btn btn-info btn-lg"><span
         class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Stock</a>
+<br>
 <!-- Modal -->
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -88,4 +89,9 @@
 
 </div>
 <br>
+
+</div><!-- /.container -->
+
+
+
 

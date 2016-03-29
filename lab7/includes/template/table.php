@@ -1,4 +1,4 @@
-<body>
+<body xmlns="http://www.w3.org/1999/html">
 <h2>
     Welcome <?php echo $_SESSION['user_email'] ?>
 
@@ -54,3 +54,4 @@
     </tbody> </table>
     </table>
 <?php } ?>
+

@@ -1,7 +1,23 @@
+<div class="container">
+    <hr>
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="col-lg-12">
+            <p>Copyright &copy; Shane Cunningham 2015</p>
+        </div>
+
+    </footer>
+</div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="./js/bootstrap.js"></script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/table.js"></script>
 
 </body>
 

@@ -1,3 +1,4 @@
+<body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -35,29 +36,26 @@
                 <li>
                     <a href="clock.html">Clock</a>
                 </li>
-                <li class="active">
+                <li <?php echo $link1; ?>>
                     <a href="editStock.php">Stock</a>
                 </li>
 
-                <li>
+                <li <?php echo $link2; ?>>
                     <a href="showContactUs.php">Administrator panel</a>
                 </li>
 
                 <?php if (!isset($_SESSION['user_email'])) { ?>
-                    <li class="active"><a href="login.php">Login</a></li>
-                    <li><a href="register.php">Register</a></li>
+                    <li <?php echo $link3; ?>><a href="login.php">Login</a></li>
+                    <li <?php echo $link4; ?>><a href="register.php">Register</a></li>
                 <?php } ?>
 
                 <?php if (isset($_SESSION['user_email'])) { ?>
                     <li><a href="logout.php">Logout</a></li>
                 <?php } ?>
-
-
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
 
 <div class="container">
     <div class="row">
